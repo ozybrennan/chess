@@ -1,0 +1,2 @@
+class StalemateError < ArgumentError
+end

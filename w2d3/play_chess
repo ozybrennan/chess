@@ -1,0 +1,24 @@
+#! /usr/bin/env ruby
+
+require_relative 'game.rb'
+
+white = ARGV.shift
+black = ARGV.shift
+
+if white == "ai"
+  white = AIPlayer.new(:white)
+else
+  white = HumanPlayer.new(white, :white)
+end
+
+if black == "ai"
+  black = AIPlayer.new(:black)
+else
+  black = HumanPlayer.new(black, :black)
+end
+
+
+if __FILE__ == $PROGRAM_NAME
+  game = Game.new(white, black)
+  game.play
+end

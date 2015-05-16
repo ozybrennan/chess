@@ -48,10 +48,14 @@ class Board
 
   def in_check?(color)
     king = find_piece(color, King).first
+    king.moved = true
     all_pieces_of(other_color(color)).each do |piece|
-      return true if piece.moves.include?(king.pos)
+      if piece.moves.include?(king.pos)
+        king.moved = false
+        return true
+      end
     end
-
+    king.moved = false
     false
   end
 
@@ -107,6 +111,10 @@ class Board
     new_board
   end
 
+  def find_piece(color, type)
+    all_pieces_of(color).select {|i| i.is_a? type }
+  end
+
   private
 
   def build_board
@@ -135,10 +143,6 @@ class Board
     grid[6].each_index do |i|
       grid[6][i] = Pawn.new(self, [6, i], :white)
     end
-  end
-
-  def find_piece(color, type)
-    all_pieces_of(color).select {|i| i.is_a? type }
   end
 
   def other_color(color)

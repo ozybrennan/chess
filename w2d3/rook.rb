@@ -46,7 +46,7 @@ class Rook < SlidingPiece
   private
 
   def castle
-    king = board.find_piece(color, King)
+    king = board.find_piece(color, King)[0]
     if moved || king.moved
       []
     elsif board.get_captured?(pos, color) || board.get_captured?(king.pos, color)

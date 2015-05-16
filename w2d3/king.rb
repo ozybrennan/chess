@@ -5,8 +5,8 @@ class King < SteppingPiece
   KING_MOVES = [[1, 1], [1, -1], [-1, 1], [-1, -1],
   [0, 1], [1, 0], [-1, 0], [0, -1]]
 
-  attr_accessor :pos
-  attr_reader :board, :color, :symbol, :value, :moved
+  attr_accessor :pos, :moved
+  attr_reader :board, :color, :symbol, :value
 
   def initialize(board, pos, color)
     super(board, pos, color)

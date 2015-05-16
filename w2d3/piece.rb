@@ -11,6 +11,7 @@ class Piece
     valid_moves = []
     moves.each do |destination|
       new_board = board.dup
+      new_board.find_piece(color, King)[0].moved = true
       new_board.move!(pos, destination)
       valid_moves << destination unless new_board.in_check?(color)
     end
@@ -23,7 +24,6 @@ class Piece
   end
 
   def check_board_at(pos)
-    # p pos
     if board[pos].nil?
       :nil
     elsif board[pos].color != color
@@ -38,6 +38,10 @@ class Piece
   def off_board?(pos)
     x, y = pos
     x < 0 || x > 7 || y < 0 || y > 7
+  end
+
+  def other_color
+    color == :white ? :black : :white
   end
 
 end
